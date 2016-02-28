@@ -27,6 +27,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var replyUser: User?
     
     override func viewDidLoad() {
+        super.viewDidLoad()
+        
         nameLabel.text = User.currentUser?.name
         screennameLabel.text = "@" + (User.currentUser?.screenname)!
         bannerImageView.setImageWithURL(NSURL(string: (User.currentUser?.profileBannerUrl)!)!)
@@ -54,9 +56,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         segmentControl.selectedSegmentIndex = 0
-        
-        super.viewDidLoad()
-
     }
 
     @IBAction func onIndexChange(sender: UISegmentedControl) {
@@ -81,7 +80,7 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCellWithIdentifier("tweetCell", forIndexPath: indexPath) as! tweetCell
-        cell.tweet = userTweets![indexPath.row]
+        cell.tweet = tweets![indexPath.row]
         cell.delegate = self
         
         return cell
@@ -93,7 +92,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         } else {
             return tweets!.count
         }
-        
     }
     
     
@@ -165,7 +163,19 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
             })
         }
     }
-
+    
+    // MARK: - NewTweetViewController Delegate Method
+    func newTweetViewController(newTweetViewController: NewTweetViewController, didCreateTweet newTweet: String) {
+        TwitterClient.sharedInstance.tweetWithCompletion(["status": newTweetViewController.newTweet!]) { (tweet, error) -> () in
+            if tweet != nil {
+                self.userTweets?.insert(tweet!, atIndex: 0)
+                self.tweets = self.userTweets
+                self.tableView.reloadData()
+                print("new tweet created")
+                
+            }
+        }
+    }
 
 
     // MARK: - Navigation
@@ -184,5 +194,6 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         // Pass the selected object to the new view controller.
     }
 
+    
 
 }

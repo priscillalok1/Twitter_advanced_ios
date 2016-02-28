@@ -38,7 +38,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func userTimelineWithCompletion(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         GET("1.1/statuses/user_timeline.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            print("user timeline:\(response)")
+            //print("user timeline:\(response)")
             let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
@@ -49,7 +49,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func favoritesTimelineWithCompletion(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         GET("1.1/favorites/list.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            print("user timeline:\(response)")
+            //print("favorites timeline:\(response)")
             let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
@@ -60,7 +60,7 @@ class TwitterClient: BDBOAuth1SessionManager {
     
     func mentionsTimelineWithCompletion(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
         GET("1.1/statuses/mentions_timeline.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
-            //print("mentions timeline:\(response)")
+            print("mentions timeline:\(response)")
             let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
             completion(tweets: tweets, error: nil)
             }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
