@@ -17,18 +17,25 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        let navigationBarAppearace = UINavigationBar.appearance()
-        let font = UIFont(name: "HelveticaNeue-bold", size: 20)
-        navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.whiteColor()]
-        
-        // Override point for customization after application launch.
         NSNotificationCenter.defaultCenter().addObserver(self, selector: "userDidLogout", name: userDidLogoutNotification, object: nil)
         if User.currentUser != nil {
             //go to the logged in screen
             print("current user detected: \(User.currentUser?.name)")
-            let vc = storyboard.instantiateViewControllerWithIdentifier("TweetsNavViewController") as UIViewController
+            let vc = storyboard.instantiateViewControllerWithIdentifier("hamburgerNavController") as UIViewController
             window?.rootViewController = vc
+            
+            let navigationcontroller = window!.rootViewController as! UINavigationController
+            let hamburgerViewController = navigationcontroller.topViewController as! HamburgerViewController
+            let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
+            
+            menuViewController.hamburgerViewController = hamburgerViewController
+            hamburgerViewController.menuViewController = menuViewController
         }
+        
+//        let navigationBarAppearace = UINavigationBar.appearance()
+//        let font = UIFont(name: "HelveticaNeue-bold", size: 20)
+//        navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.whiteColor()]
+        
         return true
     }
     

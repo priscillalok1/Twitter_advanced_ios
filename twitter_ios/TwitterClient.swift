@@ -36,6 +36,39 @@ class TwitterClient: BDBOAuth1SessionManager {
         })
     }
     
+    func userTimelineWithCompletion(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        GET("1.1/statuses/user_timeline.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("user timeline:\(response)")
+            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("error getting user timeline")
+                completion(tweets: nil, error: error)
+        })
+    }
+    
+    func favoritesTimelineWithCompletion(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        GET("1.1/favorites/list.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            print("user timeline:\(response)")
+            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("error getting favorites timeline")
+                completion(tweets: nil, error: error)
+        })
+    }
+    
+    func mentionsTimelineWithCompletion(params: NSDictionary?, completion: (tweets: [Tweet]?, error: NSError?) -> ()) {
+        GET("1.1/statuses/mentions_timeline.json", parameters: params, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
+            //print("mentions timeline:\(response)")
+            let tweets = Tweet.tweetsWithArray(response as! [NSDictionary])
+            completion(tweets: tweets, error: nil)
+            }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
+                print("error getting mentions timeline")
+                completion(tweets: nil, error: error)
+        })
+    }
+    
     func retweetWithCompletion(id: NSInteger?, completion: (tweet: Tweet?, error: NSError?) -> ()) {
         let urlString: String = "1.1/statuses/retweet/" + String(id!) + ".json"
         POST(urlString, parameters: nil, progress: nil, success: { (operation: NSURLSessionDataTask, response: AnyObject?) -> Void in
@@ -130,15 +163,11 @@ class TwitterClient: BDBOAuth1SessionManager {
                 //print("user:\(response)")
                 let user = User(dictionary: response as! NSDictionary)
                 User.currentUser = user
-                print("user: \(user.name)")
                 self.loginCompletion?(user: user, error: nil)
                 }, failure: { (operation: NSURLSessionDataTask?, error: NSError) -> Void in
                     print("error getting current user")
                     self.loginCompletion?(user: nil, error: error)
             })
-            
-
-            
             }) { (error: NSError!) -> Void in
                 print("failed to receive access token")
                 self.loginCompletion?(user: nil, error: error)

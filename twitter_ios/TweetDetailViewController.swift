@@ -9,7 +9,6 @@
 import UIKit
 
 class TweetDetailViewController: UIViewController {
-
   
     @IBOutlet weak var retweetTopConstraint: NSLayoutConstraint!
     @IBOutlet weak var retweetsNumberLabel: UILabel!
