@@ -48,7 +48,11 @@ class HamburgerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         isMenuShowing=false
-        //NSNotificationCenter.addObserver(self, forKeyPath: "MenuViewShowing", options: <#T##NSKeyValueObservingOptions#>, context: <#T##UnsafeMutablePointer<Void>#>)
+        
+        let logo = UIImage(named: "TwitterLogo-1.png")
+        let imageView = UIImageView(image:logo)
+        self.navigationItem.titleView = imageView
+
     }
 
     override func didReceiveMemoryWarning() {

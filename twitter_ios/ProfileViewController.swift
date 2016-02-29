@@ -25,33 +25,39 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     var likedTweets: [Tweet]?
     
     var replyUser: User?
+    var currUser: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        nameLabel.text = User.currentUser?.name
-        screennameLabel.text = "@" + (User.currentUser?.screenname)!
-        bannerImageView.setImageWithURL(NSURL(string: (User.currentUser?.profileBannerUrl)!)!)
-        thumbImageView.setImageWithURL(NSURL(string: (User.currentUser?.profileImageUrl)!)!)
+        print(currUser)
+
+        if currUser == nil {
+            currUser = User.currentUser
+        }
+        nameLabel.text = currUser?.name
+        screennameLabel.text = "@" + (currUser?.screenname)!
+        bannerImageView.setImageWithURL(NSURL(string: (currUser?.profileBannerUrl)!)!)
+        thumbImageView.setImageWithURL(NSURL(string: (currUser?.profileImageUrl)!)!)
         thumbImageView.layer.cornerRadius = 3
         thumbImageView.clipsToBounds = true
         thumbImageBackgroundView.layer.cornerRadius = 3
         thumbImageBackgroundView.clipsToBounds = true
-        followersCountLabel.text = String((User.currentUser?.followersCount)!)
-        followingCountLabel.text = String((User.currentUser?.followingCount)!)
+        
+        followersCountLabel.text = String((currUser?.followersCount)!)
+        followingCountLabel.text = String((currUser?.followingCount)!)
 
         tableView.delegate = self
         tableView.dataSource = self
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 120
         
-        TwitterClient.sharedInstance.userTimelineWithCompletion(["screen_name":(User.currentUser?.screenname)!]) { (tweets, error) -> () in
+        TwitterClient.sharedInstance.userTimelineWithCompletion(["screen_name":(currUser?.screenname)!]) { (tweets, error) -> () in
             self.userTweets = tweets
             self.tweets = self.userTweets
             self.tableView.reloadData()
         }
         
-        TwitterClient.sharedInstance.favoritesTimelineWithCompletion(nil) { (tweets, error) -> () in
+        TwitterClient.sharedInstance.favoritesTimelineWithCompletion(["screen_name":(currUser?.screenname)!]) { (tweets, error) -> () in
             self.likedTweets = tweets
         }
         

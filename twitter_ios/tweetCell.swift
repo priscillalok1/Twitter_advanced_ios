@@ -21,6 +21,7 @@ extension String {
     optional func tweetedCell (tweetedCell: tweetCell, retweetButtonPressed value:Bool)
     optional func tweetedCell (tweetedCell: tweetCell, favoriteButtonPressed value:Bool)
     optional func tweetedCell (tweetedCell: tweetCell, replyButtonPressed value: Bool)
+    optional func tweetedCell (tweetedCell: tweetCell, thumbImageButtonPressed value: Bool)
 }
 
 class tweetCell: UITableViewCell {
@@ -35,6 +36,7 @@ class tweetCell: UITableViewCell {
     @IBOutlet weak var retweetLabel: UILabel!
     @IBOutlet weak var retweetTopConstraint: NSLayoutConstraint!
     
+    @IBOutlet weak var thumbImageButton: UIButton!
     @IBOutlet weak var retweetButton: UIButton!
     @IBOutlet weak var favoriteButton: UIButton!
     @IBOutlet weak var replyButton: UIButton!
@@ -87,6 +89,8 @@ class tweetCell: UITableViewCell {
         retweetButton.addTarget(self, action: "retweetButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
         favoriteButton.addTarget(self, action: "favoriteButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
         replyButton.addTarget(self, action: "replyButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
+//        print(thumbImageButton)
+//        thumbImageButton.addTarget(self, action: "thumbImageButtonPressed", forControlEvents: UIControlEvents.TouchUpInside)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {
@@ -95,7 +99,15 @@ class tweetCell: UITableViewCell {
         // Configure the view for the selected state
     }
     
+    @IBAction func onThumbImageButtonPressed(sender: AnyObject) {
+        delegate?.tweetedCell!(self, thumbImageButtonPressed: thumbImageButton.touchInside)
+    }
+    
     //MARK: -Private Methods
+    func thumbImageButtonPressed() {
+        delegate?.tweetedCell!(self, thumbImageButtonPressed: thumbImageButton.touchInside)
+    }
+    
     func retweetButtonPressed() {
         delegate?.tweetedCell!(self, retweetButtonPressed: retweetButton.touchInside)
     }

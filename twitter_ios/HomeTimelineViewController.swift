@@ -18,6 +18,7 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     
     var lastTweetId: Int?
     var replyUser: User?
+    var currTweetUser: User?
     
     @IBOutlet weak var tableView: UITableView!
     
@@ -71,7 +72,6 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         } else {
             return tweets!.count
         }
-        
     }
     
     
@@ -112,6 +112,12 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
         replyUser = tweetedCell.tweet.user
         self.performSegueWithIdentifier("newTweetSegue", sender: self)
     }
+    
+    func tweetedCell(tweetedCell: tweetCell, thumbImageButtonPressed value: Bool) {
+        currTweetUser = tweetedCell.tweet.user
+        self.performSegueWithIdentifier("thumbImageClickedSegue", sender: self)
+    }
+    
     
     //MARK: - Private methods
     func unretweet(tweet: Tweet, index: NSIndexPath) {
@@ -199,6 +205,12 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
             let indexPath: NSIndexPath = tableView.indexPathForSelectedRow!
             let detailViewController = segue.destinationViewController as! TweetDetailViewController
             detailViewController.tweet = self.tweets![indexPath.row]
+        } else if segue.identifier == "thumbImageClickedSegue" {
+            let navigationcontroller = segue.destinationViewController as! UINavigationController
+            let profileViewController = navigationcontroller.topViewController as! ProfileViewController
+            profileViewController.currUser = currTweetUser!
+            print(profileViewController.currUser?.name)
+            print(currTweetUser?.name)
         }
     }
     
