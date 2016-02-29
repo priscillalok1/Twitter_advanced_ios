@@ -1,6 +1,6 @@
-# Project 4 - *Name of App Here*
+# Project 4 - TwitAdvanced
 
-Time spent: **X** hours spent in total
+Time spent: **10** hours spent in total
 
 ## User Stories
 
