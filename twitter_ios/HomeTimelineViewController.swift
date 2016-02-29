@@ -51,10 +51,10 @@ class HomeTimelineViewController: UIViewController, UITableViewDataSource, UITab
     }
     
     
-    @IBAction func onLogout(sender: AnyObject) {
-        User.currentUser?.logout()
+    @IBAction func thumbImageClicked(sender: AnyObject) {
+        
+        
     }
-    
     // MARK: - Table View methods
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {

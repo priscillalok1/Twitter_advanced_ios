@@ -16,6 +16,8 @@ class HamburgerViewController: UIViewController {
     
     var originalLeftMargin: CGFloat!
     
+    var isMenuShowing: Bool!
+    
     var menuViewController: UIViewController! {
         didSet {
             view.layoutIfNeeded()
@@ -45,13 +47,27 @@ class HamburgerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        isMenuShowing=false
+        //NSNotificationCenter.addObserver(self, forKeyPath: "MenuViewShowing", options: <#T##NSKeyValueObservingOptions#>, context: <#T##UnsafeMutablePointer<Void>#>)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    @IBAction func onHamburgerMenuClick(sender: AnyObject) {
+        originalLeftMargin = leftMarginConstraint.constant
+        if(isMenuShowing == true) {
+            self.isMenuShowing = false
+            self.leftMarginConstraint.constant = 0
+        } else {
+            self.isMenuShowing = true
+            UIView.animateWithDuration(0.5, delay: 0.4,
+                options: [.CurveEaseInOut], animations: {
+                    self.leftMarginConstraint.constant = self.view.frame.size.width - 100
+                }, completion: nil)
+        }
     }
     
     @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
@@ -66,9 +82,11 @@ class HamburgerViewController: UIViewController {
         } else if sender.state == .Ended {
             UIView.animateWithDuration(0.3, animations: {
                 if velocity.x > 0 { //open
-                    self.leftMarginConstraint.constant = self.view.frame.size.width - 50
+                    self.leftMarginConstraint.constant = self.view.frame.size.width - 100
+                    self.isMenuShowing = true
                 } else { // close
                     self.leftMarginConstraint.constant = 0
+                    self.isMenuShowing = false
                 }
                 self.view.layoutIfNeeded()
             })

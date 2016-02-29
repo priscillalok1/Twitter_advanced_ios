@@ -152,6 +152,17 @@
                                                     <color key="textColor" red="0.52882339020000002" green="0.52882339020000002" blue="0.52882339020000002" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
+                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="VPN-QO-Brn">
+                                                    <rect key="frame" x="8" y="35" width="45" height="45"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="height" constant="45" id="U9e-dy-c69"/>
+                                                        <constraint firstAttribute="width" constant="45" id="uod-tx-jmF"/>
+                                                    </constraints>
+                                                    <connections>
+                                                        <action selector="thumbImageClicked:" destination="iU6-zJ-6j8" eventType="touchUpInside" id="pAn-yL-Aln"/>
+                                                        <segue destination="IOk-Ej-Sf1" kind="modal" identifier="thumbImageClickedSegue" modalTransitionStyle="flipHorizontal" id="6CH-j2-hCW"/>
+                                                    </connections>
+                                                </button>
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="FZv-2L-yCr" firstAttribute="leading" secondItem="pbE-Ke-Clu" secondAttribute="trailing" constant="50" id="1Kn-Bn-dYM"/>
@@ -161,8 +172,10 @@
                                                 <constraint firstItem="lka-ZX-kh9" firstAttribute="leading" secondItem="W9j-4c-X9B" secondAttribute="trailing" constant="8" id="Egu-Kf-93g"/>
                                                 <constraint firstItem="FZv-2L-yCr" firstAttribute="top" secondItem="lka-ZX-kh9" secondAttribute="bottom" constant="13" id="FwC-YT-Zpe"/>
                                                 <constraint firstAttribute="bottom" relation="greaterThanOrEqual" secondItem="PQL-rP-7Wq" secondAttribute="bottom" constant="8" id="Gjt-Np-eD6"/>
+                                                <constraint firstItem="VPN-QO-Brn" firstAttribute="centerY" secondItem="W9j-4c-X9B" secondAttribute="centerY" id="K2k-2m-lnQ"/>
                                                 <constraint firstItem="GQR-KD-BK3" firstAttribute="leading" secondItem="PQL-rP-7Wq" secondAttribute="trailing" constant="50" id="KZs-0E-tIW"/>
                                                 <constraint firstItem="eY5-d0-bxz" firstAttribute="centerY" secondItem="21I-ie-jpE" secondAttribute="centerY" id="Let-by-gG5"/>
+                                                <constraint firstItem="VPN-QO-Brn" firstAttribute="centerX" secondItem="W9j-4c-X9B" secondAttribute="centerX" id="QhI-Sg-YHR"/>
                                                 <constraint firstItem="GQR-KD-BK3" firstAttribute="centerY" secondItem="PQL-rP-7Wq" secondAttribute="centerY" id="TMa-Bp-gWg"/>
                                                 <constraint firstItem="21I-ie-jpE" firstAttribute="top" secondItem="upO-LV-UhU" secondAttribute="top" constant="8" id="TRq-bC-Ghy"/>
                                                 <constraint firstItem="pbE-Ke-Clu" firstAttribute="centerY" secondItem="GQR-KD-BK3" secondAttribute="centerY" id="Tt1-qe-yeV"/>
@@ -208,11 +221,8 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Twitter" id="PNw-PI-hIZ">
-                        <barButtonItem key="leftBarButtonItem" title="Logout" id="7yS-1c-BNq">
-                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            <connections>
-                                <action selector="onLogout:" destination="iU6-zJ-6j8" id="tvN-uu-10I"/>
-                            </connections>
+                        <barButtonItem key="leftBarButtonItem" image="hamburgerMenu" id="AmT-jz-naW">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="composeIcon" id="8NW-5z-57G">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -593,7 +603,11 @@
                             <constraint firstItem="Rqf-oB-HNL" firstAttribute="leading" secondItem="3vw-2a-SaJ" secondAttribute="trailing" constant="43" id="zN4-Ck-8VF"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="Ea3-Si-Gyl"/>
+                    <navigationItem key="navigationItem" id="Ea3-Si-Gyl">
+                        <barButtonItem key="leftBarButtonItem" image="hamburgerMenu" id="adW-E0-dIi">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="bannerImageView" destination="gif-SA-atl" id="pvd-3G-4hZ"/>
                         <outlet property="followersCountLabel" destination="Rqf-oB-HNL" id="cmk-XR-gbW"/>
@@ -771,7 +785,11 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
-                    <navigationItem key="navigationItem" id="jPo-Tk-mze"/>
+                    <navigationItem key="navigationItem" id="jPo-Tk-mze">
+                        <barButtonItem key="leftBarButtonItem" image="hamburgerMenu" id="f3t-g7-bJQ">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tableView" destination="myV-kE-IyY" id="Hjz-jz-kX4"/>
                     </connections>
@@ -817,7 +835,14 @@
                             <constraint firstItem="7m8-xn-XIT" firstAttribute="top" secondItem="nBM-TY-UOA" secondAttribute="bottom" id="mBF-ea-S6n"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="cYu-y4-crC"/>
+                    <navigationItem key="navigationItem" id="cYu-y4-crC">
+                        <barButtonItem key="leftBarButtonItem" image="hamburgerMenu" id="2Ti-om-q2c">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="onHamburgerMenuClick:" destination="bhP-Sv-EVi" id="4Le-bt-VUE"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="contentView" destination="nBM-TY-UOA" id="3pX-V1-0Y5"/>
                         <outlet property="leftMarginConstraint" destination="N3x-hb-mO1" id="Kdw-l8-QD1"/>
@@ -1109,7 +1134,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQ9-6S-gvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="582" y="1991"/>
+            <point key="canvasLocation" x="557" y="2238"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pce-QI-CgA">
@@ -1135,6 +1160,7 @@
             <objects>
                 <navigationController storyboardIdentifier="profileNavigationController" automaticallyAdjustsScrollViewInsets="NO" useStoryboardIdentifierAsRestorationIdentifier="YES" id="IOk-Ej-Sf1" sceneMemberID="viewController">
                     <toolbarItems/>
+                    <navigationItem key="navigationItem" id="us6-kJ-lHP"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="Fho-pd-eU8">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
@@ -1192,11 +1218,12 @@
         <image name="TwitterLogo" width="144" height="144"/>
         <image name="cancelButton" width="25" height="25"/>
         <image name="composeIcon" width="25" height="25"/>
+        <image name="hamburgerMenu" width="25" height="25"/>
         <image name="reply" width="32" height="32"/>
         <image name="retweet" width="32" height="32"/>
         <image name="star-unselected" width="32" height="32"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="g4U-6p-9QN"/>
+        <segue reference="BCt-OS-UnD"/>
     </inferredMetricsTieBreakers>
 </document>

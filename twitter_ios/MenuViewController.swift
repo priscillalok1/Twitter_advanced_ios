@@ -64,6 +64,7 @@ class MenuViewController: UIViewController, UITableViewDataSource, UITableViewDe
             User.currentUser?.logout()
         } else {
             hamburgerViewController.contentViewController = viewControllers[indexPath.row]
+            hamburgerViewController.isMenuShowing = false
         }
         
     }
