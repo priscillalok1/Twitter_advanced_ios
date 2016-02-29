@@ -74,6 +74,9 @@ class HamburgerViewController: UIViewController {
         }
     }
     
+    @IBAction func onComposeButtonClicked(sender: AnyObject) {
+        
+    }
     @IBAction func onPanGesture(sender: UIPanGestureRecognizer) {
         let translation = sender.translationInView(view)
         let velocity = sender.velocityInView(view)

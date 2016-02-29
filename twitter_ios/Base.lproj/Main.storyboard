@@ -131,6 +131,9 @@
                                                         <constraint firstAttribute="width" constant="27" id="GHf-we-5ei"/>
                                                     </constraints>
                                                     <state key="normal" image="retweet"/>
+                                                    <connections>
+                                                        <segue destination="IOk-Ej-Sf1" kind="modal" identifier="thumbImageClickedSegue" modalTransitionStyle="crossDissolve" id="YAg-wm-utj"/>
+                                                    </connections>
                                                 </button>
                                                 <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FZv-2L-yCr">
                                                     <rect key="frame" x="237" y="102" width="21" height="21"/>
@@ -222,9 +225,6 @@
                     </view>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" title="Twitter" id="PNw-PI-hIZ">
-                        <barButtonItem key="leftBarButtonItem" image="hamburgerMenu" id="AmT-jz-naW">
-                            <color key="tintColor" red="0.0" green="1" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
-                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" image="composeIcon" id="8NW-5z-57G">
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
@@ -235,7 +235,6 @@
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="tableView" destination="HSf-ZD-wcE" id="3fx-FM-fpf"/>
-                        <segue destination="IOk-Ej-Sf1" kind="modal" identifier="thumbImageClickedSegue" id="RMg-Vu-kkg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="6El-SK-24i" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -338,7 +337,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ZoF-Hx-ow2" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1944" y="2238"/>
+            <point key="canvasLocation" x="2508" y="-905"/>
         </scene>
         <!--Profile View Controller-->
         <scene sceneID="dTz-GC-UNu">
@@ -606,8 +605,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="Ea3-Si-Gyl">
-                        <barButtonItem key="leftBarButtonItem" image="hamburgerMenu" id="adW-E0-dIi">
-                            <color key="tintColor" red="0.5" green="0.0" blue="0.5" alpha="1" colorSpace="calibratedRGB"/>
+                        <barButtonItem key="leftBarButtonItem" image="back" id="adW-E0-dIi">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <connections>
+                                <action selector="onBackButtonPressed:" destination="3kV-v4-bfS" id="usI-o7-3qQ"/>
+                            </connections>
                         </barButtonItem>
                     </navigationItem>
                     <connections>
@@ -850,6 +852,13 @@
                             <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <connections>
                                 <action selector="onHamburgerMenuClick:" destination="bhP-Sv-EVi" id="4Le-bt-VUE"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" image="composeIcon" id="Hga-Om-XDd">
+                            <color key="tintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <action selector="onComposeButtonClicked:" destination="bhP-Sv-EVi" id="4BB-jd-cMo"/>
+                                <segue destination="Sxw-HJ-8gt" kind="modal" id="99x-Bo-TcG"/>
                             </connections>
                         </barButtonItem>
                     </navigationItem>
@@ -1144,7 +1153,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EQ9-6S-gvk" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="557" y="2238"/>
+            <point key="canvasLocation" x="1361" y="1238"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="Pce-QI-CgA">
@@ -1163,7 +1172,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oia-rs-YWZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1412" y="2238"/>
+            <point key="canvasLocation" x="1976" y="-905"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="AQV-0y-SB5">
@@ -1226,6 +1235,7 @@
     </scenes>
     <resources>
         <image name="TwitterLogo" width="144" height="144"/>
+        <image name="back" width="25" height="25"/>
         <image name="cancelButton" width="25" height="25"/>
         <image name="composeIcon" width="25" height="25"/>
         <image name="hamburgerMenu" width="25" height="25"/>

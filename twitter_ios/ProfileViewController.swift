@@ -20,6 +20,8 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
     @IBOutlet weak var thumbImageView: UIImageView!
     @IBOutlet weak var bannerImageView: UIImageView!
     
+    var hamburgerViewController: HamburgerViewController!
+    
     var tweets: [Tweet]?
     var userTweets: [Tweet]?
     var likedTweets: [Tweet]?
@@ -62,6 +64,9 @@ class ProfileViewController: UIViewController, UITableViewDelegate, UITableViewD
         }
         
         segmentControl.selectedSegmentIndex = 0
+    }
+    @IBAction func onBackButtonPressed(sender: AnyObject) {
+        dismissViewControllerAnimated(true, completion: nil)
     }
 
     @IBAction func onIndexChange(sender: UISegmentedControl) {

@@ -27,14 +27,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let navigationcontroller = window!.rootViewController as! UINavigationController
             let hamburgerViewController = navigationcontroller.topViewController as! HamburgerViewController
             let menuViewController = storyboard.instantiateViewControllerWithIdentifier("MenuViewController") as! MenuViewController
-            
+
             menuViewController.hamburgerViewController = hamburgerViewController
+            
             hamburgerViewController.menuViewController = menuViewController
         }
-        
-//        let navigationBarAppearace = UINavigationBar.appearance()
-//        let font = UIFont(name: "HelveticaNeue-bold", size: 20)
-//        navigationBarAppearace.titleTextAttributes = [NSFontAttributeName : font!, NSForegroundColorAttributeName : UIColor.whiteColor()]
         
         return true
     }
